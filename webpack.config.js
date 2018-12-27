@@ -95,8 +95,6 @@ Object.assign(pro, base, {
 })
 
 // 生产环境先清理dist
-if (process.env.NODE_ENV !== 'development') {
-  pro.plugins.unshift(new CleanWebpackPlugin(['dist']))
-}
+pro.plugins.unshift(new CleanWebpackPlugin(['dist']))
 
 module.exports = process.env.NODE_ENV === 'development' ? dev : pro
