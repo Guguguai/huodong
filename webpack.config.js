@@ -91,10 +91,18 @@ Object.assign(dev, base, {
   }
 })
 Object.assign(pro, base, {
-  mode: 'production'
+  mode: 'production',
+  plugins: [
+    // 生产环境先清理dist
+    new CleanWebpackPlugin(['dist']),
+    // html模板
+    new HtmlWebpackPlugin({
+      template: './dev/index.html',
+      hash: true
+    }),
+    // 分离css
+    new ExtractTextWebpackPlugin('index.css'),
+  ]
 })
-
-// 生产环境先清理dist
-pro.plugins.unshift(new CleanWebpackPlugin(['dist']))
 
 module.exports = process.env.NODE_ENV === 'development' ? dev : pro
