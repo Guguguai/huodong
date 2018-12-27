@@ -29,7 +29,13 @@ const base = {
         use: [
           // 大于500kb不转base64
           // 'url-loader?limit=500000'
-          'url-loader?limit=1'
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 1,
+              name: '[name].[ext]'
+            }
+          }, 'image-webpack-loader'
         ]
       },
       // 处理html内图片问题
@@ -50,12 +56,13 @@ const base = {
   },
   optimization: {
     // 分离大文件
+    // 在入口import的大文件都会被打包到bundle
     splitChunks: {
       chunks: 'initial', // 只对入口文件处理
       cacheGroups: {
         vendor: {
           test: /node_modules\//,
-          filename: 'jquery.js',
+          filename: 'bundle.js',
           priority: 10,
           enforce: true
         }
@@ -63,7 +70,6 @@ const base = {
     }
   },
   plugins: [
-    new CleanWebpackPlugin(['dist']),
     // html模板
     new HtmlWebpackPlugin({
       template: './dev/index.html',
@@ -87,5 +93,10 @@ Object.assign(dev, base, {
 Object.assign(pro, base, {
   mode: 'production'
 })
+
+// 生产环境先清理dist
+if (process.env.NODE_ENV !== 'development') {
+  pro.plugins.unshift(new CleanWebpackPlugin(['dist']))
+}
 
 module.exports = process.env.NODE_ENV === 'development' ? dev : pro
