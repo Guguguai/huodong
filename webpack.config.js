@@ -88,6 +88,14 @@ Object.assign(dev, base, {
   // 热更新服务器
   devServer: {
     contentBase: './dist',
+    // mock数据
+    before(app) {
+      app.get('/mockdata/:whichmock', (req, res) => {
+        // jsonp
+        const callback = req.query.callback ? req.query.callback : 'callback'
+        res.send(`${callback}(${JSON.stringify(require('./mock/mockdata')[req.params.whichmock])})`)
+      })
+    }
   }
 })
 Object.assign(pro, base, {
