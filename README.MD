@@ -8,10 +8,9 @@
 7.图片如需转换base64请在webpack中设置limit
 
 相关命令：
-1.npm run dev，开启本地服务器调试，需要在构建时拉取mock，否则无游戏数据
-2.npm run build，打包文件，打包完成后可上传dist文件夹到测试机测试
+1.npm run dev，开启本地服务器调试
+2.npm run build，打包文件
 
 关于mock：
-1.mock文件夹下的mockurl文件为进游戏数据，可自行修改
-2.mock文件夹下的mockdata文件模拟服务器接口返回数据，可自行修改想要的返回格式及数据
-3.需要mock服务器接口时，ajax请求http://localhost:8080/mockdata/[interface]，[interface]为需要模拟的接口，返回jsonp
+1.mock文件夹下的mockdata文件模拟服务器接口返回数据，可自行修改想要的返回格式及数据
+2.需要mock服务器接口时，ajax请求http://localhost:8080/mockdata/[interface]，[interface]为需要模拟的接口，返回jsonp
