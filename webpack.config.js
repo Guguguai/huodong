@@ -35,7 +35,7 @@ const base = {
               limit: 1,
               name: '[name].[ext]'
             }
-          }, 'image-webpack-loader'
+          }, 'img-loader'
         ]
       },
       // 处理html内图片问题
