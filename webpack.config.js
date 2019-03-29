@@ -25,7 +25,7 @@ const base = {
         })
       },
       {
-        test: /\.(png|jpg|gif|svg)$/,
+        test: /\.(png|jpg|gif|svg|jpeg)$/,
         use: [
           // 大于500kb不转base64
           // 'url-loader?limit=500000'
@@ -35,7 +35,12 @@ const base = {
               limit: 1,
               name: '[name].[ext]'
             }
-          }, 'img-loader'
+          }, {
+            loader: 'image-webpack-loader', // 压缩图片
+            options: {
+              bypassOnDebug: true,
+            }
+          }
         ]
       },
       // 处理html内图片问题
